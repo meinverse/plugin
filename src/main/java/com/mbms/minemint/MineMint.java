@@ -15,8 +15,12 @@ public final class MineMint extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-
+        
         getLogger().info("onEnable has been invoked!");
+
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
+
         registerCommand("ignite", new IgniteCommand(), null);
         registerCommand("home", new HomeCommands(), new HomeTabCompletion());
     }

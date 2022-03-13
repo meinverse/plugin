@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,6 +30,16 @@ public class SetHomeCommand extends SubCommand {
 
     @Override
     public void perform(@NotNull Player player, String @NotNull [] args) {
+        int homeCount = getHomeCount(player);
+        if (homeCount >= MineMint.getPlugin().getConfig().getInt("max-homes")) {
+            player.sendMessage(ChatColor.RED + "You have reached the maximum amount of homes!");
+            return;
+        }
+        if (args.length > 1 && args[1].length() > 16) {
+            player.sendMessage(ChatColor.RED + "The home name must be 16 characters or less!");
+            return;
+        }
+
         Location location = player.getLocation();
         String world = Objects.requireNonNull(location.getWorld()).getName();
         String[] locationParts = {
@@ -43,5 +54,13 @@ public class SetHomeCommand extends SubCommand {
 
         player.getPersistentDataContainer().set(namespaceKey, PersistentDataType.STRING, locationString);
         player.sendMessage(ChatColor.GREEN + "Set your home" + (args.length > 1 ? " called " + args[1] : "") + " here!");
+    }
+
+    private int getHomeCount(@NotNull Player player) {
+        PersistentDataContainer data = player.getPersistentDataContainer();
+        int homeCount = 0;
+        for (NamespacedKey key : data.getKeys())
+            if (key.getKey().startsWith("home-")) homeCount++;
+        return homeCount;
     }
 }

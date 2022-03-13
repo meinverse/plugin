@@ -49,7 +49,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.2.2</version>
                 <configuration>
-                    <outputDirectory>/Users/beeinger/Work/MineMint/server/plugins</outputDirectory>
+                    <outputDirectory>${env.SERVER_PATH}</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
