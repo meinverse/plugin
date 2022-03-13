@@ -15,9 +15,7 @@ import java.util.concurrent.ExecutionException;
 public class Http {
     private static final GsonFactory JSON_FACTORY = new GsonFactory();
     private static final HttpRequestFactory REQUEST_FACTORY = new NetHttpTransport().createRequestFactory(
-            (HttpRequest request) -> {
-                request.setParser(new JsonObjectParser(JSON_FACTORY));
-            });
+            (HttpRequest request) -> request.setParser(new JsonObjectParser(JSON_FACTORY)));
 
     @Nullable
     public static <T> T get(String url, Class<T> responseClass) {
@@ -30,6 +28,7 @@ public class Http {
             parsed = res.parseAs(responseClass);
         } catch (IOException | ExecutionException | InterruptedException e) {
             System.out.println("Error while getting data from " + url);
+            e.printStackTrace();
         }
 
         return parsed;
