@@ -12,6 +12,14 @@ commands:
     description: Home commands list
     usage: /<command> <sub command> <name>
     permission: default.home
+  mint:
+    description: This command opens minting menu.
+    usage: /<command>
+    permission: default.mint
+  nasa:
+    description: This command gets data from NASA.
+    usage: /<command>
+    permission: default.nasa
 permissions:
   default:
     description: Basic permissions for the server.
@@ -19,3 +27,5 @@ permissions:
     children:
       default.ignite: true
       default.home: true
+      default.mint: true
+      default.nasa: true
