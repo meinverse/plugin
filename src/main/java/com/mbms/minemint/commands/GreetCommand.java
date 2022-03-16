@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class GreetingCommand implements CommandExecutor {
+public class GreetCommand implements CommandExecutor {
     private static final String DUMMY_API_URL = "https://dummy-api.deta.dev/greeting";
 
     @Override

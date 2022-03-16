@@ -1,8 +1,8 @@
 package com.mbms.minemint;
 
-import com.mbms.minemint.commands.GreetingCommand;
+import com.mbms.minemint.commands.GreetCommand;
 import com.mbms.minemint.commands.IgniteCommand;
-import com.mbms.minemint.commands.MintingCommand;
+import com.mbms.minemint.commands.MintCommand;
 import com.mbms.minemint.commands.NasaCommand;
 import com.mbms.minemint.commands.home.HomeCommands;
 import com.mbms.minemint.commands.home.HomeTabCompletion;
@@ -26,9 +26,9 @@ public final class MineMint extends JavaPlugin {
 
         registerCommand("ignite", new IgniteCommand(), null);
         registerCommand("home", new HomeCommands(), new HomeTabCompletion());
-        registerCommand("mint", new MintingCommand(), null);
+        registerCommand("mint", new MintCommand(), null);
         registerCommand("nasa", new NasaCommand(), null);
-        registerCommand("greet", new GreetingCommand(), null);
+        registerCommand("greet", new GreetCommand(), null);
     }
 
     @Override
