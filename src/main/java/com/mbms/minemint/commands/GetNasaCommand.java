@@ -15,7 +15,7 @@ public class GetNasaCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player player) {
-            NasaResponse nasa = Http.get(NASA_URL, NasaResponse.class);
+            NasaResponse nasa = Http.request("GET", NASA_URL, NasaResponse.class, null);
             assert nasa != null;
             player.sendMessage(ChatColor.BOLD + "" + ChatColor.DARK_AQUA + "Data from NASA:");
             player.sendMessage("Title: " + nasa.getTitle());
