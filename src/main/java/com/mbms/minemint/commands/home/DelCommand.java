@@ -3,28 +3,26 @@ package com.mbms.minemint.commands.home;
 import com.mbms.minemint.MineMint;
 import com.mbms.minemint.utils.SubCommand;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
-public class TpHomeCommand extends SubCommand {
+public class DelCommand extends SubCommand {
     @Override
     public String[] getNames() {
-        return new String[]{"tp", "teleport"};
+        return new String[]{"del", "delete", "remove"};
     }
 
     @Override
     public String getDescription() {
-        return "Tp to your home";
+        return "Delete your home";
     }
 
     @Override
     public String getSyntax() {
-        return "/home tp <home name>(optional)";
+        return "/home del <home name>(optional)";
     }
 
     @Override
@@ -34,17 +32,8 @@ public class TpHomeCommand extends SubCommand {
         PersistentDataContainer data = player.getPersistentDataContainer();
 
         if (data.has(namespaceKey, PersistentDataType.STRING)) {
-            String locationString = data.get(namespaceKey, PersistentDataType.STRING);
-            assert locationString != null;
-            String[] locationParts = locationString.split(",");
-            World world = MineMint.getPlugin().getServer().getWorld(locationParts[0]);
-            assert world != null;
-            int x = Integer.parseInt(locationParts[1]);
-            int y = Integer.parseInt(locationParts[2]);
-            int z = Integer.parseInt(locationParts[3]);
-            Location location = world.getBlockAt(x, y, z).getLocation();
-            player.teleport(location);
-            player.sendMessage(ChatColor.GREEN + "Teleported to your home" + (args.length > 1 ? " called " + args[1] : "") + "!");
+            data.remove(namespaceKey);
+            player.sendMessage(ChatColor.GREEN + "Deleted your home" + (args.length > 1 ? " called " + args[1] : "") + "!");
         } else
             player.sendMessage("You don't have a home" + (args.length > 1 ? " called " + args[1] : "") + "!");
     }

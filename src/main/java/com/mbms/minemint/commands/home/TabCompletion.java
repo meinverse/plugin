@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class HomeTabCompletion implements TabCompleter {
+public class TabCompletion implements TabCompleter {
     @Nullable
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -22,7 +22,7 @@ public class HomeTabCompletion implements TabCompleter {
                 suggestions.add("set");
                 suggestions.add("del");
                 suggestions.add("tp");
-            } else if (args.length == 2 && (new TpHomeCommand().isThisCommand(args[0]) || new DelHomeCommand().isThisCommand(args[0]))) {
+            } else if (args.length == 2 && (new TpCommand().isThisCommand(args[0]) || new DelCommand().isThisCommand(args[0]))) {
                 Set<NamespacedKey> keys = player.getPersistentDataContainer().getKeys();
                 for (NamespacedKey key : keys)
                     if (key.getKey().startsWith("home-")) suggestions.add(key.getKey().substring("home-".length()));

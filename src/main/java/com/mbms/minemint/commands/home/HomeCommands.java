@@ -5,6 +5,6 @@ import com.mbms.minemint.utils.SubCommand;
 
 public class HomeCommands extends CommandManager {
     public HomeCommands() {
-        super(new SubCommand[]{new SetHomeCommand(), new TpHomeCommand(), new DelHomeCommand()});
+        super(new SubCommand[]{new SetHomeCommand(), new TpCommand(), new DelCommand()});
     }
 }

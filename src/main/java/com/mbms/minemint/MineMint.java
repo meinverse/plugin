@@ -5,7 +5,7 @@ import com.mbms.minemint.commands.IgniteCommand;
 import com.mbms.minemint.commands.MintCommand;
 import com.mbms.minemint.commands.NasaCommand;
 import com.mbms.minemint.commands.home.HomeCommands;
-import com.mbms.minemint.commands.home.HomeTabCompletion;
+import com.mbms.minemint.commands.home.TabCompletion;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
@@ -25,7 +25,7 @@ public final class MineMint extends JavaPlugin {
         saveDefaultConfig();
 
         registerCommand("ignite", new IgniteCommand(), null);
-        registerCommand("home", new HomeCommands(), new HomeTabCompletion());
+        registerCommand("home", new HomeCommands(), new TabCompletion());
         registerCommand("mint", new MintCommand(), null);
         registerCommand("nasa", new NasaCommand(), null);
         registerCommand("greet", new GreetCommand(), null);
