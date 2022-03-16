@@ -20,6 +20,10 @@ commands:
     description: This command gets data from NASA.
     usage: /<command>
     permission: default.nasa
+  greet:
+    description: This command greets a player.
+    usage: /<command>
+    permission: default.greet
 permissions:
   default:
     description: Basic permissions for the server.
@@ -29,3 +33,4 @@ permissions:
       default.home: true
       default.mint: true
       default.nasa: true
+      default.greet: true

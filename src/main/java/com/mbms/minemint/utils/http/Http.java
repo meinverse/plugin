@@ -1,4 +1,4 @@
-package com.mbms.minemint.utils;
+package com.mbms.minemint.utils.http;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
@@ -19,23 +19,25 @@ public class Http {
             (HttpRequest request) -> request.setParser(new JsonObjectParser(JSON_FACTORY)));
 
     @Nullable
-    public static <T> T request(String method, String url, Class<T> responseClass, Class payload) {
-        T parsed = null;
+    public static <T> ParsedResponse<T> request(String method, String url, Class<T> responseClass, Object payload) {
+        ParsedResponse<T> response;
         JsonHttpContent _payload = null;
 
         if (payload != null)
             _payload = new JsonHttpContent(JSON_FACTORY, payload);
 
+        GenericUrl genericUrl = new GenericUrl(url);
+        HttpRequest request;
+        HttpResponse res = null;
         try {
-            GenericUrl genericUrl = new GenericUrl(url);
-            HttpRequest request = REQUEST_FACTORY.buildRequest(method, genericUrl, _payload);
-            HttpResponse res = request.executeAsync().get();
-            parsed = res.parseAs(responseClass);
-        } catch (IOException | ExecutionException | InterruptedException e) {
-            System.out.println("Error while getting data from " + url);
+            request = REQUEST_FACTORY.buildRequest(method, genericUrl, _payload);
+            res = request.executeAsync().get();
+        } catch (IOException | InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+        if (res == null) return null;
+        response = new ParsedResponse<>(res, responseClass);
 
-        return parsed;
+        return response;
     }
 }

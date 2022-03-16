@@ -1,8 +1,9 @@
 package com.mbms.minemint;
 
-import com.mbms.minemint.commands.GetNasaCommand;
+import com.mbms.minemint.commands.GreetingCommand;
 import com.mbms.minemint.commands.IgniteCommand;
 import com.mbms.minemint.commands.MintingCommand;
+import com.mbms.minemint.commands.NasaCommand;
 import com.mbms.minemint.commands.home.HomeCommands;
 import com.mbms.minemint.commands.home.HomeTabCompletion;
 import org.bukkit.command.CommandExecutor;
@@ -26,7 +27,8 @@ public final class MineMint extends JavaPlugin {
         registerCommand("ignite", new IgniteCommand(), null);
         registerCommand("home", new HomeCommands(), new HomeTabCompletion());
         registerCommand("mint", new MintingCommand(), null);
-        registerCommand("nasa", new GetNasaCommand(), null);
+        registerCommand("nasa", new NasaCommand(), null);
+        registerCommand("greet", new GreetingCommand(), null);
     }
 
     @Override
