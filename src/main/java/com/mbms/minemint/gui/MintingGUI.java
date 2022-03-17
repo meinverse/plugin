@@ -1,36 +1,37 @@
 package com.mbms.minemint.gui;
 
-import org.bukkit.Bukkit;
+import com.mbms.minemint.utils.InventoryGUI;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MintingGUI {
     private static final String mainMenu = ChatColor.BLUE + "Main Menu";
     private static final String mintingMenu = "Minting";
     private static final String claimMenu = "Claiming";
 
+    public static String getMainMenu() {
+        return mainMenu;
+    }
+
+    public static String getMintingMenu() {
+        return mintingMenu;
+    }
+
+    public static String getClaimMenu() {
+        return claimMenu;
+    }
+
     public static void openMainMenu(Player player) {
-        Inventory menu = Bukkit.createInventory(player, 45, mainMenu);
+        Map<Integer, ItemStack> options = new HashMap<>();
+        options.put(0, new ItemStack(Material.PLAYER_HEAD, 1));
 
-        ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD, 1);
-
-        ItemMeta meta = playerHead.getItemMeta();
-        assert meta != null;
-        meta.setDisplayName("Head");
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GOLD + "Explanation: " + ChatColor.RED + "...");
-        lore.add(ChatColor.GOLD + "Date: " + ChatColor.AQUA + "...");
-        meta.setLore(lore);
-        playerHead.setItemMeta(meta);
-
-        menu.addItem(playerHead);
-        player.openInventory(menu);
+        InventoryGUI gui = new InventoryGUI(player, 9, mainMenu, options);
+        gui.open(player);
     }
 
     public static void openMintMenu(Player player) {
