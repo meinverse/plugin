@@ -2,7 +2,8 @@ package com.mbms.minemint.commands.home;
 
 import com.mbms.minemint.MineMint;
 import com.mbms.minemint.utils.SubCommand;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
@@ -44,8 +45,8 @@ public class TpCommand extends SubCommand {
             int z = Integer.parseInt(locationParts[3]);
             Location location = world.getBlockAt(x, y, z).getLocation();
             player.teleport(location);
-            player.sendMessage(ChatColor.GREEN + "Teleported to your home" + (args.length > 1 ? " called " + args[1] : "") + "!");
+            player.sendMessage(Component.text("Teleported to your home" + Utils.getHomeNamePart(args) + "!").color(NamedTextColor.GREEN));
         } else
-            player.sendMessage("You don't have a home" + (args.length > 1 ? " called " + args[1] : "") + "!");
+            player.sendMessage(Component.text("You don't have a home" + Utils.getHomeNamePart(args) + "!").color(NamedTextColor.RED));
     }
 }

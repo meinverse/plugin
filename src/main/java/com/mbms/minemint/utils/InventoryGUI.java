@@ -1,5 +1,6 @@
 package com.mbms.minemint.utils;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,8 +16,8 @@ public class InventoryGUI {
     protected ItemStack FILL_STACK;
     protected Inventory inventory;
 
-    public InventoryGUI(Player player, int size, String name, Map<Integer, ItemStack> options) {
-        FILL_STACK = createItem(Material.BLACK_STAINED_GLASS_PANE, " ");
+    public InventoryGUI(Player player, int size, Component name, Map<Integer, ItemStack> options) {
+        FILL_STACK = createItem(Material.BLACK_STAINED_GLASS_PANE, Component.text(" "));
         inventory = Bukkit.createInventory(player, size, name);
 
         for (int i = 0; i < inventory.getSize(); i++) {
@@ -40,12 +41,12 @@ public class InventoryGUI {
     }
 
     @NotNull
-    public static ItemStack createItem(Material material, String name, String... lore) {
+    public static ItemStack createItem(Material material, Component name, Component... lore) {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
-        meta.setDisplayName(name);
-        meta.setLore(Arrays.asList(lore));
+        meta.displayName(name);
+        meta.lore(Arrays.asList(lore));
         item.setItemMeta(meta);
         return item;
     }

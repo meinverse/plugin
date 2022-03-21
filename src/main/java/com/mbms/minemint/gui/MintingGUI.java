@@ -1,7 +1,8 @@
 package com.mbms.minemint.gui;
 
 import com.mbms.minemint.utils.InventoryGUI;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -10,19 +11,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MintingGUI {
-    private static final String mainMenu = ChatColor.BLUE + "Main Menu";
-    private static final String mintingMenu = "Minting";
-    private static final String claimMenu = "Claiming";
+    private static final Component mainMenu = Component.text("Main Menu").color(NamedTextColor.AQUA);
+    private static final Component mintingMenu = Component.text("Minting").color(NamedTextColor.AQUA);
+    private static final Component claimMenu = Component.text("Claiming").color(NamedTextColor.AQUA);
 
-    public static String getMainMenu() {
+    public static Component getMainMenu() {
         return mainMenu;
     }
 
-    public static String getMintingMenu() {
+    public static Component getMintingMenu() {
         return mintingMenu;
     }
 
-    public static String getClaimMenu() {
+    public static Component getClaimMenu() {
         return claimMenu;
     }
 

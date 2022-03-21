@@ -3,7 +3,9 @@ package com.mbms.minemint.commands;
 import com.mbms.minemint.types.NasaResponse;
 import com.mbms.minemint.utils.http.Http;
 import com.mbms.minemint.utils.http.ParsedResponse;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,7 +24,7 @@ public class NasaCommand implements CommandExecutor {
             NasaResponse data = nasa.getParsedJsonData();
             assert data != null;
 
-            player.sendMessage(ChatColor.BOLD + "" + ChatColor.DARK_AQUA + "Data from NASA:");
+            player.sendMessage(Component.text("Data from NASA:").color(NamedTextColor.DARK_AQUA).decorate(TextDecoration.BOLD));
             player.sendMessage("Title: " + data.getTitle());
             player.sendMessage(data.getExplanation());
             player.sendMessage(data.getMedia_type());

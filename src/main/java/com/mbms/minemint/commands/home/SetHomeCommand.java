@@ -2,7 +2,8 @@ package com.mbms.minemint.commands.home;
 
 import com.mbms.minemint.MineMint;
 import com.mbms.minemint.utils.SubCommand;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -32,11 +33,11 @@ public class SetHomeCommand extends SubCommand {
     public void perform(@NotNull Player player, String @NotNull [] args) {
         int homeCount = getHomeCount(player);
         if (homeCount >= MineMint.getPlugin().getConfig().getInt("max-homes")) {
-            player.sendMessage(ChatColor.RED + "You have reached the maximum amount of homes!");
+            player.sendMessage(Component.text("You have reached the maximum amount of homes!").color(NamedTextColor.RED));
             return;
         }
         if (args.length > 1 && args[1].length() > 16) {
-            player.sendMessage(ChatColor.RED + "The home name must be 16 characters or less!");
+            player.sendMessage(Component.text("The home name must be 16 characters or less!").color(NamedTextColor.RED));
             return;
         }
 
@@ -53,7 +54,7 @@ public class SetHomeCommand extends SubCommand {
         NamespacedKey namespaceKey = new NamespacedKey(MineMint.getPlugin(), name);
 
         player.getPersistentDataContainer().set(namespaceKey, PersistentDataType.STRING, locationString);
-        player.sendMessage(ChatColor.GREEN + "Set your home" + (args.length > 1 ? " called " + args[1] : "") + " here!");
+        player.sendMessage(Component.text("Set your home" + Utils.getHomeNamePart(args) + " here!").color(NamedTextColor.GREEN));
     }
 
     private int getHomeCount(@NotNull Player player) {

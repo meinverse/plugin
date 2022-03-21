@@ -2,7 +2,8 @@ package com.mbms.minemint.commands.home;
 
 import com.mbms.minemint.MineMint;
 import com.mbms.minemint.utils.SubCommand;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -30,11 +31,12 @@ public class DelCommand extends SubCommand {
         String name = "home-" + (args.length > 1 ? args[1] : "home");
         NamespacedKey namespaceKey = new NamespacedKey(MineMint.getPlugin(), name);
         PersistentDataContainer data = player.getPersistentDataContainer();
+        String homeNamePart = Utils.getHomeNamePart(args);
 
         if (data.has(namespaceKey, PersistentDataType.STRING)) {
             data.remove(namespaceKey);
-            player.sendMessage(ChatColor.GREEN + "Deleted your home" + (args.length > 1 ? " called " + args[1] : "") + "!");
+            player.sendMessage(Component.text("Deleted your home" + homeNamePart + "!").color(NamedTextColor.GREEN));
         } else
-            player.sendMessage("You don't have a home" + (args.length > 1 ? " called " + args[1] : "") + "!");
+            player.sendMessage(Component.text("You don't have a home" + homeNamePart + "!").color(NamedTextColor.RED));
     }
 }
