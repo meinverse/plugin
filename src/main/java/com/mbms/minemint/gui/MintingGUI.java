@@ -11,35 +11,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MintingGUI {
-    private static final Component mainMenu = Component.text("Main Menu").color(NamedTextColor.AQUA);
-    private static final Component mintingMenu = Component.text("Minting").color(NamedTextColor.AQUA);
-    private static final Component claimMenu = Component.text("Claiming").color(NamedTextColor.AQUA);
+    public static final Component mainMenu = Component.text("Main Menu").color(NamedTextColor.AQUA);
+    public static final Component mintingMenu = Component.text("Minting").color(NamedTextColor.AQUA);
+    public static final Component claimMenu = Component.text("Claiming").color(NamedTextColor.AQUA);
+    public static final ItemStack mintButton = InventoryGUI.createItem(Material.EMERALD, Component.text("Mint").color(NamedTextColor.GREEN));
+    public static final ItemStack claimButton = InventoryGUI.createItem(Material.DIAMOND, Component.text("Claim").color(NamedTextColor.AQUA));
+    public static final ItemStack closeButton = InventoryGUI.createItem(Material.SKELETON_SKULL, Component.text("Close"));
 
-    public static Component getMainMenu() {
-        return mainMenu;
-    }
-
-    public static Component getMintingMenu() {
-        return mintingMenu;
-    }
-
-    public static Component getClaimMenu() {
-        return claimMenu;
-    }
 
     public static void openMainMenu(Player player) {
         Map<Integer, ItemStack> options = new HashMap<>();
-        options.put(0, new ItemStack(Material.PLAYER_HEAD, 1));
 
+        options.put(3, mintButton);
+        options.put(5, claimButton);
+
+        options.put(8, closeButton);
         InventoryGUI gui = new InventoryGUI(player, 9, mainMenu, options);
         gui.open(player);
     }
 
     public static void openMintMenu(Player player) {
-
+        Map<Integer, ItemStack> options = new HashMap<>();
+        
+        options.put(8, closeButton);
+        InventoryGUI gui = new InventoryGUI(player, 9, mintingMenu, options);
+        gui.open(player);
     }
 
     public static void openClaimMenu(Player player) {
+        Map<Integer, ItemStack> options = new HashMap<>();
 
+        options.put(8, closeButton);
+        InventoryGUI gui = new InventoryGUI(player, 9, claimMenu, options);
+        gui.open(player);
     }
 }
