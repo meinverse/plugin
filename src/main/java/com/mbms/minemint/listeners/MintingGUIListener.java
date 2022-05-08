@@ -16,21 +16,43 @@ public class MintingGUIListener implements Listener {
         Player player = (Player) e.getWhoClicked();
         Component name = e.getView().title();
         ItemStack clickedItem = e.getCurrentItem();
-        assert clickedItem != null;
 
-        if (clickedItem.equals(MintingGUI.closeButton))
+
+        if (clickedItem == null) return;
+        if (clickedItem.equals(MintingGUI.closeButton)) {
             e.getView().close();
-
-        if (name.equals(MintingGUI.mainMenu)) {
-            if (clickedItem.equals(MintingGUI.mintButton))
-                MintingGUI.openMintMenu(player);
-            else if (clickedItem.equals(MintingGUI.claimButton))
-                MintingGUI.openClaimMenu(player);
-        } else if (name.equals(MintingGUI.mintingMenu)) {
-            player.sendMessage("You clicked on the minting menu");
-        } else if (name.equals(MintingGUI.claimMenu)) {
-            player.sendMessage("You clicked on the claim menu");
+            e.setCancelled(true);
+            return;
         }
+
+        if (clickedItem.equals(MintingGUI.mainButton))
+            MintingGUI.openMainMenu(player);
+
+        if (name.equals(MintingGUI.mainMenu)) onMainMenuClick(e, player, clickedItem);
+        else if (name.equals(MintingGUI.mintingMenu)) onMintingMenuClick(e, player, clickedItem);
+        else if (name.equals(MintingGUI.claimMenu)) onClaimMenuClick(e, player, clickedItem);
+        else e.setCancelled(true);
+    }
+
+    private void onMainMenuClick(InventoryClickEvent e, Player player, ItemStack clickedItem) {
+        if (clickedItem.equals(MintingGUI.mintButton))
+            MintingGUI.openMintMenu(player);
+        else if (clickedItem.equals(MintingGUI.claimButton))
+            MintingGUI.openClaimMenu(player);
+
+        // Makes items in the menu unmovable
+        e.setCancelled(true);
+    }
+
+    private void onMintingMenuClick(InventoryClickEvent e, Player player, ItemStack clickedItem) {
+        player.sendMessage("You clicked on the minting menu");
+
+        // Makes items in the menu unmovable
+        e.setCancelled(true);
+    }
+
+    private void onClaimMenuClick(InventoryClickEvent e, Player player, ItemStack clickedItem) {
+        player.sendMessage("You clicked on the claim menu");
 
         // Makes items in the menu unmovable
         e.setCancelled(true);

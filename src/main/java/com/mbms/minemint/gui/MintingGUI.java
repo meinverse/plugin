@@ -17,6 +17,7 @@ public class MintingGUI {
     public static final ItemStack mintButton = InventoryGUI.createItem(Material.EMERALD, Component.text("Mint").color(NamedTextColor.GREEN));
     public static final ItemStack claimButton = InventoryGUI.createItem(Material.DIAMOND, Component.text("Claim").color(NamedTextColor.AQUA));
     public static final ItemStack closeButton = InventoryGUI.createItem(Material.SKELETON_SKULL, Component.text("Close"));
+    public static final ItemStack mainButton = InventoryGUI.createItem(Material.ARROW, Component.text("Main Menu"));
 
 
     public static void openMainMenu(Player player) {
@@ -32,7 +33,8 @@ public class MintingGUI {
 
     public static void openMintMenu(Player player) {
         Map<Integer, ItemStack> options = new HashMap<>();
-        
+
+        options.put(0, mainButton);
         options.put(8, closeButton);
         InventoryGUI gui = new InventoryGUI(player, 9, mintingMenu, options);
         gui.open(player);
@@ -41,6 +43,7 @@ public class MintingGUI {
     public static void openClaimMenu(Player player) {
         Map<Integer, ItemStack> options = new HashMap<>();
 
+        options.put(0, mainButton);
         options.put(8, closeButton);
         InventoryGUI gui = new InventoryGUI(player, 9, claimMenu, options);
         gui.open(player);
